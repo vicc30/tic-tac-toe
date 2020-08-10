@@ -107,5 +107,55 @@ class Board extends React.Component {
 ```
 
 ### 4. Add a toggle button that lets you sort the moves in either ascending or descending order.
+#### Code
+First in class game, in render() method, we need to create an element type button that when is clicked calls a function to sort the list. We add status ascending or descending and add a conditional rule for display the type of sort.
+
+```
+render() {
+    const history = this.state.history;
+...
+
+    return (
+      <div className="game">
+        ...
+        <div className="game-info">
+          <div>{status}</div>
+          <button onClick={() => this.handleToggle()}>{isAscending ? 'descending' : 'ascending'}</button>
+          <ol>{moves}</ol>
+        </div>
+      </div>
+    );
+  }
+```
+
+We add the state in game class isAscending set it to true at the first time.
+
+```
+class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...
+      isAscending: true,
+    };
+  }
+```
+We have to declare our constant isAscending in order to save the state and do the sort with the help of JS method array.prototype.reverse()
+
+```
+const isAscending =this.state.isAscending;
+    if(!isAscending) {
+      moves.reverse();
+    }
+```
+
+And finally we need to declare our function handleToggle() in order to update the state of ascending or descending in game class.
+```
+handleToggle() {
+    this.setState({
+      isAscending: !this.state.isAscending,
+    });
+  }
+```
 ### 5. When someone wins, highlight the three squares that caused the win.
 ### 6. When no one wins, display a message about the result being a draw. 
