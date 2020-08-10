@@ -49,18 +49,18 @@ render() {
   }
 ```
 
-#### 2. Bold the currently selected item in the move list.
+### 2. Bold the currently selected item in the move list.
 #### Code
-For this first we need to add a class rule for CSS.
-´´´ 
+For this, first we need to add a class rule to CSS.
+```
  .selected {
     font-weight: bold;
   }
-´´´
+```
 
-In render function we add a conditional for ´´´ className ´´´ if move is strictly equal to stepNumber then we change the class to selected else we stay the same.
+In render function we add a conditional for ``` className ``` if move is strictly equal to stepNumber then we change the class to selected else we stay the same.
 
-´´´
+```
 render() {
     const history = this.state.history;
     ...
@@ -74,10 +74,38 @@ render() {
     ...
     );
   }
-´´´
-Then we se that it comes bold the selected item.
+```
+Then we see that it comes bold the selected item.
 
-#### 3. Rewrite Board to use two loops to make the squares instead of hardcoding them.
-#### 4. Add a toggle button that lets you sort the moves in either ascending or descending order.
-#### 5. When someone wins, highlight the three squares that caused the win.
-#### 6. When no one wins, display a message about the result being a draw. 
+### 3. Rewrite Board to use two loops to make the squares instead of hardcoding them.
+#### Code
+Into the class Board we will change all the code in the render function. 
+We initialize with a constant of boardSize with a size of 3 and squares empty. We need to use two for loops, one inside another and with the method array.prototype.push() to render next square until the row is complete.
+
+```
+class Board extends React.Component {
+  renderSquare(i) {
+  ...
+  }
+
+  render() {
+    const boardSize = 3;
+    let squares = [];
+    for(let i=0; i<boardSize; ++i) {
+      let row = [];
+      for(let j=0; j<boardSize; ++j) {
+        row.push(this.renderSquare(i * boardSize + j));
+      }
+      squares.push(<div key={i} className="board-row">{row}</div>);
+    }
+
+    return (
+      <div>{squares}</div>
+    );
+  }
+}
+```
+
+### 4. Add a toggle button that lets you sort the moves in either ascending or descending order.
+### 5. When someone wins, highlight the three squares that caused the win.
+### 6. When no one wins, display a message about the result being a draw. 
