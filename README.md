@@ -1,19 +1,17 @@
 # TIC-TAC-TOE Tutorial Intro to React
 
-I have finished up the oficial React Tutorial from [reactjs.org](https://reactjs.org/tutorial/tutorial.html) in this I will add my solutions to the additional excercises.
+I have finished up the oficial React Tutorial from [reactjs.org](https://reactjs.org/tutorial/tutorial.html) and in this repository I will add my solutions to the additional excercises.
 
 ## Usage
 
-This repository use yarn.
-
-with ``` yarn start ``` command. 
+This repository use yarn with ``` yarn start ``` command. 
 
 ## Additional Excercises
 
 Here are the additional excercies 
 
 ### 1. Display the location for each move in the format (col, row) in the move history list.
-## Code
+#### Code
 
 In handleClick() function add an element to save latest move with the value that is clicked.
 
@@ -31,7 +29,7 @@ handleClick(i) {
   }
 ```
 
-Then we need to move to modify render function in order to display correctly our new element (col,row). We need to add two elements col and row and then append them to desc in order to display them.
+Then we need to modify render function in order to display correctly our new element (col,row). We need to add two elements col and row and then append them to desc in order to display them.
 
 ```
 render() {
@@ -52,6 +50,33 @@ render() {
 ```
 
 #### 2. Bold the currently selected item in the move list.
+#### Code
+For this first we need to add a class rule for CSS.
+´´´ 
+ .selected {
+    font-weight: bold;
+  }
+´´´
+
+In render function we add a conditional for ´´´ className ´´´ if move is strictly equal to stepNumber then we change the class to selected else we stay the same.
+
+´´´
+render() {
+    const history = this.state.history;
+    ...
+      return (
+        <li key={move}>
+          <button className = {move === this.state.stepNumber ? 'selected' : ''}
+          onClick={() => this.jumpTo(move)}>{desc}</button>
+        </li>
+      );
+    });
+    ...
+    );
+  }
+´´´
+Then we se that it comes bold the selected item.
+
 #### 3. Rewrite Board to use two loops to make the squares instead of hardcoding them.
 #### 4. Add a toggle button that lets you sort the moves in either ascending or descending order.
 #### 5. When someone wins, highlight the three squares that caused the win.
