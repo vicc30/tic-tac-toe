@@ -4,7 +4,7 @@ I have finished up the oficial React Tutorial from [reactjs.org](https://reactjs
 
 ## Usage
 
-This repository use yarn with ``` yarn start ``` command. 
+This repository use yarn use ``` yarn install ``` and then ``` yarn start ``` command to run local view
 
 ## Additional Excercises
 
@@ -253,3 +253,55 @@ function Square(props) {
 }
 ```
 ### 6. When no one wins, display a message about the result being a draw. 
+#### Code
+First we need to change claculateWinner() function. We need to add a draw state and a conditional that if there is a draw change the state of boolean to true.
+```
+function calculateWinner(squares) {
+  const lines = [
+    ...
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return {
+        winner: squares[a],
+        line: lines[i],
+        isDraw: false,
+      }
+    }
+  }
+  let isDraw = true;
+  for (let i = 0; i < squares.length; i++) {
+    if (squares[i] === null) {
+      isDraw = false;
+      break;
+    }
+  }
+  return {
+    winner: null,
+    line: null,
+    isDraw: isDraw,
+  };
+}
+```
+Then we need to update render function and the part of status.
+```
+ render() {
+    const history = this.state.history;
+    ...
+
+    let status;
+    if (winner) {
+      status = "Winner: " + winner;
+    } else {
+      if (winInfo.isDraw) {
+        status = "Draw";
+      } else {
+        status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      }
+    }
+...
+  }
+```
+And it is done.
+
